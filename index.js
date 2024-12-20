@@ -1,20 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const productController = require("./controller/product");
-const productRouter = express.Router();
+const productRouter = require("./routes/product");
+
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/r", productRouter);
+app.use("/", productRouter.router);
 
-productRouter
-  .post("/api/products", productController.create)
-  .get("/api/products", productController.getAll)
-  .get("/api/product/:id", productController.getOne)
-  .patch("/api/product/:id", productController.update)
-  .delete("/api/product/:id", productController.deleteOne);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
