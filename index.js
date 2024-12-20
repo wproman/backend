@@ -1,11 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+const cors = require("cors");
 const connectDB = require("./config/db");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const productRouter = require("./routes/product");
 connectDB();
 const app = express();
 const port = process.env.PORT || 5000;
+// Enable CORS
+app.use(cors());
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
