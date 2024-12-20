@@ -1,13 +1,14 @@
 const express = require("express");
+const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const productRouter = require("./routes/product");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", productRouter.router);
+app.use("/api/products", productRouter.router);
 
 
 app.listen(port, () => {
